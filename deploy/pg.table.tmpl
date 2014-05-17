@@ -1,0 +1,19 @@
+-- ========================================================================== --
+-- Deploy [% change %]
+[% FOREACH item IN requires -%]
+-- requires: [% item %]
+[% END -%]
+[% FOREACH item IN conflicts -%]
+-- conflicts: [% item %]
+[% END -%]
+-- ========================================================================== --
+BEGIN;
+
+SET client_min_messages = 'warning';
+
+DROP TABLE IF EXISTS [% IF table %][% table %][% ELSE %][% change %][% END %];
+CREATE TABLE [% IF table %][% table %][% ELSE %][% change %][% END %] (
+	-- Add columns here.
+);
+
+COMMIT;
